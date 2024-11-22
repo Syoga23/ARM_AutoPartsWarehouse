@@ -4,10 +4,23 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ExtCtrls, Vcl.ToolWin;
 
 type
   TMainForm = class(TForm)
+    TreeView1: TTreeView;
+    TreePanel: TPanel;
+    GridPanel: TPanel;
+    Splitter1: TSplitter;
+    DetailsPanel: TPanel;
+    Splitter2: TSplitter;
+    DBGrid1: TDBGrid;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }

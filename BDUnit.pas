@@ -3,13 +3,19 @@ unit BDUnit;
 interface
 
 uses
-  System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles;
+  System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles,
+  Vcl.Menus;
   //Vcl.Dialogs; if need test
 type
   TBDForm = class(TDataModule)
     Connection: TADOConnection;
     DataSource1: TDataSource;
     ADOQuery1: TADOQuery;
+    Menu: TMainMenu;
+    S1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
