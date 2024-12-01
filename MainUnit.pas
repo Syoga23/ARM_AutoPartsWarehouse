@@ -78,6 +78,7 @@ begin
  if(closeVar = 0) then Application.Terminate;
  BDForm.PartTypes.Active:= True;
  BDForm.Parts.Active:= True;
+ BDForm.Suppliers.Active := True;
  UpdateTreeView(BDForm.PartTypes);
 end;
 

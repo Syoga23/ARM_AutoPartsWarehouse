@@ -10,6 +10,7 @@ object DetailTypesRef: TDetailTypesRef
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poDefault
   TextHeight = 15
   object Splitter1: TSplitter
     Left = 0

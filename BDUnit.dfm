@@ -42,6 +42,10 @@ object BDForm: TBDForm
         Caption = #1042#1080#1076#1099' '#1076#1077#1090#1072#1083#1077#1081
         OnClick = s2Click
       end
+      object G1: TMenuItem
+        Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+        OnClick = G1Click
+      end
     end
     object N2: TMenuItem
       Caption = #1053#1072#1074#1080#1075#1072#1094#1080#1103
@@ -73,5 +77,21 @@ object BDForm: TBDForm
       'SELECT * FROM Parts WHERE TypeID = :TypeID')
     Left = 96
     Top = 80
+  end
+  object Suppliers: TADOQuery
+    Active = True
+    Connection = Connection
+    CursorType = ctStatic
+    BeforePost = PartsBeforePost
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM Suppliers')
+    Left = 96
+    Top = 144
+  end
+  object SuppliersDS: TDataSource
+    DataSet = Suppliers
+    Left = 168
+    Top = 144
   end
 end

@@ -117,6 +117,10 @@
             <Form>DetailTypesRef</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="SuppliersRefUnit.pas">
+            <Form>SuppliersRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

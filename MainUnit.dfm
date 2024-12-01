@@ -5,12 +5,15 @@ object MainForm: TMainForm
   ClientHeight = 924
   ClientWidth = 1085
   Color = clBtnFace
+  DefaultMonitor = dmDesktop
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  FormStyle = fsStayOnTop
   Menu = BDForm.Menu
+  Position = poScreenCenter
   OnShow = FormShow
   TextHeight = 15
   object Splitter1: TSplitter

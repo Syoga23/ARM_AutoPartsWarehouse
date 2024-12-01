@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles,
-  Vcl.Menus, MainUnit, DetailTypesRefUnit;
+  Vcl.Menus, MainUnit, DetailTypesRefUnit, SuppliersRefUnit;
   //Vcl.Dialogs; if need test
 type
   TBDForm = class(TDataModule)
@@ -19,11 +19,15 @@ type
     PartsDS: TDataSource;
     Parts: TADOQuery;
     s2: TMenuItem;
+    G1: TMenuItem;
+    Suppliers: TADOQuery;
+    SuppliersDS: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure PartTypesAfterPost(DataSet: TDataSet);
     procedure s2Click(Sender: TObject);
     procedure PartTypesAfterDelete(DataSet: TDataSet);
     procedure PartsBeforePost(DataSet: TDataSet);
+    procedure G1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,6 +77,11 @@ if (Not FileExists(ConfigPath))
   end;
 end;
 
+procedure TBDForm.G1Click(Sender: TObject);
+begin
+SuppliersRef.show;
+end;
+
 procedure TBDForm.PartsBeforePost(DataSet: TDataSet);
 begin
 Parts.FieldByName('TypeID').Value:= BDForm.Parts.Parameters.ParamByName('TypeID').Value;
@@ -91,7 +100,7 @@ end;
 
 procedure TBDForm.s2Click(Sender: TObject);
 begin
-DetailTypesRef.ShowModal();
+DetailTypesRef.Show;
 end;
 
 end.
