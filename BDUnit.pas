@@ -4,19 +4,26 @@ interface
 
 uses
   System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles,
-  Vcl.Menus;
+  Vcl.Menus, MainUnit, DetailTypesRefUnit;
   //Vcl.Dialogs; if need test
 type
   TBDForm = class(TDataModule)
     Connection: TADOConnection;
-    DataSource1: TDataSource;
-    ADOQuery1: TADOQuery;
+    PartTypesDS: TDataSource;
+    PartTypes: TADOQuery;
     Menu: TMainMenu;
     S1: TMenuItem;
     N1: TMenuItem;
     N2: TMenuItem;
     N3: TMenuItem;
+    PartsDS: TDataSource;
+    Parts: TADOQuery;
+    s2: TMenuItem;
     procedure DataModuleCreate(Sender: TObject);
+    procedure PartTypesAfterPost(DataSet: TDataSet);
+    procedure s2Click(Sender: TObject);
+    procedure PartTypesAfterDelete(DataSet: TDataSet);
+    procedure PartsBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -64,6 +71,27 @@ if (Not FileExists(ConfigPath))
   then begin
         SetIniDefaults;
   end;
+end;
+
+procedure TBDForm.PartsBeforePost(DataSet: TDataSet);
+begin
+Parts.FieldByName('TypeID').Value:= BDForm.Parts.Parameters.ParamByName('TypeID').Value;
+end;
+
+procedure TBDForm.PartTypesAfterDelete(DataSet: TDataSet);
+begin
+MainForm.UpdateTreeView(PartTypes);
+end;
+
+
+procedure TBDForm.PartTypesAfterPost(DataSet: TDataSet);
+begin
+MainForm.UpdateTreeView(PartTypes);
+end;
+
+procedure TBDForm.s2Click(Sender: TObject);
+begin
+DetailTypesRef.ShowModal();
 end;
 
 end.
