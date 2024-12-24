@@ -121,6 +121,30 @@
             <Form>SuppliersRef</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="WarehousesUnit.pas">
+            <Form>WarehousesRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="LocationsRefUnit.pas">
+            <Form>LocationsRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EmployeeRefUnit.pas">
+            <Form>EmployeeRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ClientsRefUnit.pas">
+            <Form>ClientsRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="StatusUnit.pas">
+            <Form>StatusRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="TransactionsTypesUnit.pas">
+            <Form>TransactionsTypesRef</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
