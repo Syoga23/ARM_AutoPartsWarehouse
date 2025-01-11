@@ -69,7 +69,6 @@ type
     TransactionsOrder_ID: TIntegerField;
     TransactionsTransactionDate: TDateTimeField;
     TransactionsQuantity: TIntegerField;
-    TransactionsPayment_method: TWideStringField;
     TransactionsTransactionType_ID: TIntegerField;
     TransactionsStatus_ID: TIntegerField;
     TransactionsWorker_ID: TIntegerField;
@@ -77,8 +76,6 @@ type
     OrdersOrderID: TAutoIncField;
     OrdersOrderDate: TWideStringField;
     OrdersQuantity: TIntegerField;
-    OrdersPartID: TIntegerField;
-    OrdersUnitPrice: TBCDField;
     OrdersStatus_ID: TIntegerField;
     OrdersEmployee_ID: TIntegerField;
     OrdersClient_ID: TIntegerField;
@@ -99,6 +96,48 @@ type
     PartsType: TStringField;
     PartsWarehouse: TStringField;
     WarehousesName: TWideStringField;
+    OrdersStatus: TStringField;
+    OrdersClient: TStringField;
+    SuppliersSupplierID: TAutoIncField;
+    SuppliersName: TWideStringField;
+    SuppliersContactName: TWideStringField;
+    SuppliersContactPhone: TWideStringField;
+    SuppliersCountry: TWideStringField;
+    SuppliersAddress: TWideStringField;
+    SuppliersEmail: TWideStringField;
+    PartTypeLookupDS: TDataSource;
+    PartTypeLookup: TADOQuery;
+    AutoIncField1: TAutoIncField;
+    WideStringField1: TWideStringField;
+    WideStringField2: TWideStringField;
+    PhotoPopupMenu: TPopupMenu;
+    e1: TMenuItem;
+    N6: TMenuItem;
+    TransactionsTransactionType: TStringField;
+    TransactionsStatus: TStringField;
+    TransactionsEmployee: TStringField;
+    TransactionsClient: TStringField;
+    TransactionsPaymentType_ID: TIntegerField;
+    OrderItems: TADOQuery;
+    OrderItemsDS: TDataSource;
+    PaymentType: TADOQuery;
+    PaymentTypeDS: TDataSource;
+    OrderItemsID: TIntegerField;
+    OrderItemsOrderID: TIntegerField;
+    OrderItemsPart_ID: TIntegerField;
+    OrderItemsQuantity: TIntegerField;
+    OrderItemsPrice: TBCDField;
+    PaymentTypeID: TIntegerField;
+    PaymentTypeName: TWideStringField;
+    s3: TMenuItem;
+    OrderItemsPartName: TStringField;
+    OrdersEmployee: TStringField;
+    N7: TMenuItem;
+    GridPopupMenu: TPopupMenu;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    N11: TMenuItem;
     procedure DataModuleCreate(Sender: TObject);
     procedure s2Click(Sender: TObject);
     procedure PartsBeforePost(DataSet: TDataSet);
@@ -108,6 +147,11 @@ type
     procedure N5Click(Sender: TObject);
     procedure C2Click(Sender: TObject);
     procedure c1Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure s3Click(Sender: TObject);
+    procedure OrdersDSDataChange(Sender: TObject; Field: TField);
+    procedure N7Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -125,7 +169,7 @@ implementation
 
 Uses MainUnit, DetailTypesRefUnit, SuppliersRefUnit, ClientsRefUnit,
   EmployeeRefUnit, LocationsRefUnit, StartupUnit, StatusUnit,
-  TransactionsTypesUnit, WarehousesUnit;
+  TransactionsTypesUnit, WarehousesUnit, AboutUnit, PaymentTypesUnit;
 
 procedure SetIniDefaults;
  Var IniLocal: TiniFile;
@@ -176,6 +220,11 @@ begin
   WarehousesRef.Show();
 end;
 
+procedure TBDForm.N3Click(Sender: TObject);
+begin
+AboutProgram.Show();
+end;
+
 procedure TBDForm.N4Click(Sender: TObject);
 begin
   EmployeeRef.Show;
@@ -184,6 +233,28 @@ end;
 procedure TBDForm.N5Click(Sender: TObject);
 begin
   ClientsRef.Show();
+end;
+
+procedure TBDForm.N7Click(Sender: TObject);
+begin
+  StatusRef.Show();
+end;
+
+
+procedure TBDForm.N8Click(Sender: TObject);
+begin
+  if GridPopupMenu.PopupComponent = MainForm.DBGrid3 then
+    MessageDlg('DBGRIDsoska', mtWarning, [mbOk], 0)
+  else
+    MessageDlg('DBGRIDLalka', mtWarning, [mbOk], 0);
+
+end;
+
+procedure TBDForm.OrdersDSDataChange(Sender: TObject; Field: TField);
+begin
+OrderItems.Close;
+OrderItems.Parameters.ParamByName('OrderKey').Value := Orders.FieldByName('OrderID').Value;
+OrderItems.Open;
 end;
 
 procedure TBDForm.PartsBeforePost(DataSet: TDataSet);
@@ -201,6 +272,11 @@ end;
 procedure TBDForm.s2Click(Sender: TObject);
 begin
 DetailTypesRef.Show;
+end;
+
+procedure TBDForm.s3Click(Sender: TObject);
+begin
+PaymentTypesRef.Show();
 end;
 
 end.

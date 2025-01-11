@@ -2,8 +2,8 @@ object ClientsRef: TClientsRef
   Left = 0
   Top = 0
   Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1082#1083#1080#1077#1085#1090#1086#1074
-  ClientHeight = 736
-  ClientWidth = 1115
+  ClientHeight = 742
+  ClientWidth = 1118
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,8 +13,8 @@ object ClientsRef: TClientsRef
   TextHeight = 15
   object Splitter1: TSplitter
     Left = 0
-    Top = 693
-    Width = 1115
+    Top = 699
+    Width = 1118
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -24,15 +24,17 @@ object ClientsRef: TClientsRef
   end
   object Panel1: TPanel
     Left = 0
-    Top = 696
-    Width = 1115
+    Top = 702
+    Width = 1118
     Height = 40
     Align = alBottom
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
+    ExplicitTop = 696
+    ExplicitWidth = 1115
     object DBNavigator1: TDBNavigator
-      Left = 874
+      Left = 877
       Top = 1
       Width = 240
       Height = 38
@@ -46,8 +48,8 @@ object ClientsRef: TClientsRef
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1115
-    Height = 693
+    Width = 1118
+    Height = 699
     Align = alClient
     Caption = 'Panel2'
     ShowCaption = False
@@ -59,8 +61,8 @@ object ClientsRef: TClientsRef
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1113
-      Height = 691
+      Width = 1116
+      Height = 697
       Align = alClient
       DataSource = BDForm.ClientsDS
       TabOrder = 0
@@ -78,37 +80,37 @@ object ClientsRef: TClientsRef
         item
           Expanded = False
           FieldName = 'FIO'
-          Width = 165
+          Width = 200
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Birthdate'
-          Width = 165
+          Width = 200
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'location_ID'
-          Width = 165
-          Visible = True
+          Width = -1
+          Visible = False
         end
         item
           Expanded = False
           FieldName = 'Email'
-          Width = 165
+          Width = 200
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Phone'
-          Width = 165
+          Width = 200
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Location'
-          Width = 165
+          Width = 200
           Visible = True
         end>
     end

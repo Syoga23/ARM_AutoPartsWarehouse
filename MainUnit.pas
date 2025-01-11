@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Data.DB, Vcl.Grids,
   Vcl.DBGrids, Vcl.ExtCtrls, Vcl.ToolWin, Data.Win.ADODB, Vcl.DBCtrls,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, Vcl.Mask;
 
 type
   TMainForm = class(TForm)
@@ -21,7 +21,6 @@ type
     ToolButton4: TToolButton;
     DBImage1: TDBImage;
     DBImagePanel: TPanel;
-    Edit1: TEdit;
     DBGrid2: TDBGrid;
     GridPanel: TPanel;
     PageControl1: TPageControl;
@@ -31,6 +30,29 @@ type
     DBGrid3: TDBGrid;
     Tab3: TTabSheet;
     DBGrid4: TDBGrid;
+    DetTypesTitle: TLabel;
+    DBEdit1: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label1: TLabel;
+    DBEdit2: TDBEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBMemo1: TDBMemo;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label8: TLabel;
+    DBLookupComboBox3: TDBLookupComboBox;
+    Label9: TLabel;
+    DBGrid5: TDBGrid;
+    Splitter3: TSplitter;
+    DBGrid6: TDBGrid;
+    Splitter4: TSplitter;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -60,7 +82,12 @@ begin
   BDForm.Transactions.Active := True;
   BDForm.Employee.Active := True;
   BDForm.Clients.Active := True;
+  BDForm.PartTypeLookup.Active := True;
+  BDForm.PaymentType.Active := True;
+  BDForm.OrderItems.Active := True;
 end;
+
+
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin

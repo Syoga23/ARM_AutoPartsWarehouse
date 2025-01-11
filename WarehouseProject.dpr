@@ -12,7 +12,9 @@ uses
   EmployeeRefUnit in 'EmployeeRefUnit.pas' {EmployeeRef},
   ClientsRefUnit in 'ClientsRefUnit.pas' {ClientsRef},
   StatusUnit in 'StatusUnit.pas' {StatusRef},
-  TransactionsTypesUnit in 'TransactionsTypesUnit.pas' {TransactionsTypesRef};
+  TransactionsTypesUnit in 'TransactionsTypesUnit.pas' {TransactionsTypesRef},
+  AboutUnit in 'AboutUnit.pas' {AboutProgram},
+  PaymentTypesUnit in 'PaymentTypesUnit.pas' {PaymentTypesRef};
 
 {$R *.res}
 
@@ -29,5 +31,7 @@ begin
   Application.CreateForm(TClientsRef, ClientsRef);
   Application.CreateForm(TStatusRef, StatusRef);
   Application.CreateForm(TTransactionsTypesRef, TransactionsTypesRef);
+  Application.CreateForm(TAboutProgram, AboutProgram);
+  Application.CreateForm(TPaymentTypesRef, PaymentTypesRef);
   Application.Run;
 end.
