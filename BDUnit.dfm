@@ -1,6 +1,6 @@
 object BDForm: TBDForm
   OnCreate = DataModuleCreate
-  Height = 367
+  Height = 424
   Width = 960
   object Connection: TADOConnection
     Connected = True
@@ -64,6 +64,10 @@ object BDForm: TBDForm
         Caption = #1057#1082#1083#1072#1076#1099
         OnClick = C2Click
       end
+      object N8: TMenuItem
+        Caption = #1042#1080#1076#1099' '#1090#1088#1072#1085#1079#1072#1082#1094#1080#1081
+        OnClick = N8Click
+      end
       object s2: TMenuItem
         Caption = #1042#1080#1076#1099' '#1076#1077#1090#1072#1083#1077#1081
         OnClick = s2Click
@@ -99,7 +103,6 @@ object BDForm: TBDForm
     Top = 80
   end
   object Parts: TADOQuery
-    Active = True
     Connection = Connection
     CursorType = ctStatic
     BeforePost = PartsBeforePost
@@ -176,7 +179,7 @@ object BDForm: TBDForm
       DisplayLabel = #1042#1080#1076' '#1079#1072#1087#1095#1072#1089#1090#1080
       FieldKind = fkLookup
       FieldName = 'Type'
-      LookupDataSet = PartTypes
+      LookupDataSet = PartTypeLookup
       LookupKeyFields = 'Type_ID'
       LookupResultField = 'Type_Name'
       KeyFields = 'TypeID'
@@ -333,7 +336,6 @@ object BDForm: TBDForm
     Top = 24
   end
   object Orders: TADOQuery
-    Active = True
     Connection = Connection
     CursorType = ctStatic
     Parameters = <>
@@ -441,7 +443,6 @@ object BDForm: TBDForm
     end
     object TransactionsWorker_ID: TIntegerField
       FieldName = 'Employee_ID'
-      Visible = False
     end
     object TransactionsClient_ID: TIntegerField
       FieldName = 'Client_ID'
@@ -467,15 +468,14 @@ object BDForm: TBDForm
       KeyFields = 'Status_ID'
       Lookup = True
     end
-    object TransactionsEmployee: TStringField
-      DisplayLabel = #1056#1072#1073#1086#1090#1085#1080#1082
+    object TransactionsEmployee2: TStringField
+      DisplayLabel = #1057#1086#1090#1088#1091#1076#1085#1080#1082
       FieldKind = fkLookup
       FieldName = 'Employee'
       LookupDataSet = Employee
       LookupKeyFields = 'ID'
       LookupResultField = 'FIO'
       KeyFields = 'Employee_ID'
-      Size = 0
       Lookup = True
     end
     object TransactionsClient: TStringField
@@ -486,6 +486,16 @@ object BDForm: TBDForm
       LookupKeyFields = 'ID'
       LookupResultField = 'FIO'
       KeyFields = 'Client_ID'
+      Lookup = True
+    end
+    object TransactionsPaymentType: TStringField
+      DisplayLabel = #1052#1077#1090#1086#1076' '#1086#1087#1083#1072#1090#1099
+      FieldKind = fkLookup
+      FieldName = 'PaymentType'
+      LookupDataSet = PaymentType
+      LookupKeyFields = 'ID'
+      LookupResultField = 'Name'
+      KeyFields = 'PaymentType_ID'
       Lookup = True
     end
   end
@@ -653,13 +663,15 @@ object BDForm: TBDForm
     end
   end
   object PhotoPopupMenu: TPopupMenu
-    Left = 200
-    Top = 304
+    Left = 40
+    Top = 368
     object e1: TMenuItem
       Caption = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1092#1086#1090#1086
+      OnClick = e1Click
     end
     object N6: TMenuItem
       Caption = #1059#1076#1072#1083#1080#1090#1100' '#1092#1086#1090#1086
+      OnClick = N6Click
     end
   end
   object OrderItems: TADOQuery
@@ -685,19 +697,29 @@ object BDForm: TBDForm
       FieldName = 'OrderID'
       Visible = False
     end
-    object OrderItemsPart_ID: TIntegerField
-      FieldName = 'Part_ID'
-      Visible = False
-    end
-    object OrderItemsPartName: TStringField
+    object OrderItemsPart: TStringField
       DisplayLabel = #1044#1077#1090#1072#1083#1100
       FieldKind = fkLookup
-      FieldName = 'PartName'
+      FieldName = 'Part'
       LookupDataSet = Parts
       LookupKeyFields = 'PartID'
       LookupResultField = 'PartName'
       KeyFields = 'Part_ID'
       Lookup = True
+    end
+    object OrderItemsOrder_Date: TDateField
+      DisplayLabel = #1044#1072#1090#1072' '#1079#1072#1082#1072#1079#1072
+      FieldKind = fkLookup
+      FieldName = 'Order_Date'
+      LookupDataSet = OrdersLookup
+      LookupKeyFields = 'OrderID'
+      LookupResultField = 'OrderDate'
+      KeyFields = 'OrderID'
+      Lookup = True
+    end
+    object OrderItemsPart_ID: TIntegerField
+      FieldName = 'Part_ID'
+      Visible = False
     end
     object OrderItemsQuantity: TIntegerField
       DisplayLabel = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086
@@ -741,18 +763,60 @@ object BDForm: TBDForm
   object GridPopupMenu: TPopupMenu
     Left = 336
     Top = 304
-    object N8: TMenuItem
+    object Edit: TMenuItem
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100
-      OnClick = N8Click
+      OnClick = EditClick
     end
-    object N9: TMenuItem
-      Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+    object Add: TMenuItem
+      Caption = #1044#1086#1073#1072#1074#1080#1090#1100'/'#1057#1086#1093#1088#1072#1085#1080#1090#1100
+      OnClick = AddClick
     end
-    object N10: TMenuItem
+    object Cancel: TMenuItem
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
+      OnClick = CancelClick
     end
-    object N11: TMenuItem
+    object Del: TMenuItem
       Caption = #1059#1076#1072#1083#1080#1090#1100
+      OnClick = DelClick
     end
+  end
+  object OrdersLookupDS: TDataSource
+    DataSet = OrdersLookup
+    Left = 432
+    Top = 304
+  end
+  object OrdersLookup: TADOQuery
+    Active = True
+    Connection = Connection
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM Orders')
+    Left = 432
+    Top = 248
+    object OrdersLookupOrderID: TAutoIncField
+      FieldName = 'OrderID'
+      ReadOnly = True
+    end
+    object OrdersLookupOrderDate: TWideStringField
+      FieldName = 'OrderDate'
+      Size = 10
+    end
+    object OrdersLookupQuantity: TIntegerField
+      FieldName = 'Quantity'
+    end
+    object OrdersLookupStatus_ID: TIntegerField
+      FieldName = 'Status_ID'
+    end
+    object OrdersLookupClient_ID: TIntegerField
+      FieldName = 'Client_ID'
+    end
+    object OrdersLookupEmployee_ID: TIntegerField
+      FieldName = 'Employee_ID'
+    end
+  end
+  object OpenPictureDialog1: TOpenPictureDialog
+    Left = 152
+    Top = 368
   end
 end

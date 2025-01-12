@@ -25,11 +25,11 @@ type
     GridPanel: TPanel;
     PageControl1: TPageControl;
     Tab1: TTabSheet;
-    DBGrid1: TDBGrid;
+    DetailsGrid: TDBGrid;
     Tab2: TTabSheet;
-    DBGrid3: TDBGrid;
+    OrdersGrid: TDBGrid;
     Tab3: TTabSheet;
-    DBGrid4: TDBGrid;
+    TransactionsGrid: TDBGrid;
     DetTypesTitle: TLabel;
     DBEdit1: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
@@ -49,11 +49,12 @@ type
     Label8: TLabel;
     DBLookupComboBox3: TDBLookupComboBox;
     Label9: TLabel;
-    DBGrid5: TDBGrid;
+    ItemsGrid2: TDBGrid;
     Splitter3: TSplitter;
-    DBGrid6: TDBGrid;
+    ItemsGrid1: TDBGrid;
     Splitter4: TSplitter;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,9 +86,15 @@ begin
   BDForm.PartTypeLookup.Active := True;
   BDForm.PaymentType.Active := True;
   BDForm.OrderItems.Active := True;
+  BDForm.OrdersLookup.Active := True;
 end;
 
 
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+PageControl1.TabIndex := 0;
+end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin

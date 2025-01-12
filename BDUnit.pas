@@ -4,8 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles,
-  Vcl.Menus;
-  //Vcl.Dialogs; if need test
+  Vcl.Menus, Vcl.Controls, Vcl.ExtDlgs, Vcl.Graphics;
 type
   TBDForm = class(TDataModule)
     Connection: TADOConnection;
@@ -115,7 +114,6 @@ type
     N6: TMenuItem;
     TransactionsTransactionType: TStringField;
     TransactionsStatus: TStringField;
-    TransactionsEmployee: TStringField;
     TransactionsClient: TStringField;
     TransactionsPaymentType_ID: TIntegerField;
     OrderItems: TADOQuery;
@@ -130,14 +128,27 @@ type
     PaymentTypeID: TIntegerField;
     PaymentTypeName: TWideStringField;
     s3: TMenuItem;
-    OrderItemsPartName: TStringField;
     OrdersEmployee: TStringField;
     N7: TMenuItem;
     GridPopupMenu: TPopupMenu;
+    Edit: TMenuItem;
+    Add: TMenuItem;
+    Cancel: TMenuItem;
+    Del: TMenuItem;
+    TransactionsPaymentType: TStringField;
+    OrderItemsPart: TStringField;
+    OrdersLookupDS: TDataSource;
+    OrdersLookup: TADOQuery;
+    OrdersLookupOrderID: TAutoIncField;
+    OrdersLookupOrderDate: TWideStringField;
+    OrdersLookupQuantity: TIntegerField;
+    OrdersLookupStatus_ID: TIntegerField;
+    OrdersLookupClient_ID: TIntegerField;
+    OrdersLookupEmployee_ID: TIntegerField;
+    OrderItemsOrder_Date: TDateField;
     N8: TMenuItem;
-    N9: TMenuItem;
-    N10: TMenuItem;
-    N11: TMenuItem;
+    TransactionsEmployee2: TStringField;
+    OpenPictureDialog1: TOpenPictureDialog;
     procedure DataModuleCreate(Sender: TObject);
     procedure s2Click(Sender: TObject);
     procedure PartsBeforePost(DataSet: TDataSet);
@@ -151,7 +162,13 @@ type
     procedure s3Click(Sender: TObject);
     procedure OrdersDSDataChange(Sender: TObject; Field: TField);
     procedure N7Click(Sender: TObject);
+    procedure EditClick(Sender: TObject);
+    procedure AddClick(Sender: TObject);
+    procedure CancelClick(Sender: TObject);
+    procedure DelClick(Sender: TObject);
     procedure N8Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure e1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -235,18 +252,138 @@ begin
   ClientsRef.Show();
 end;
 
+procedure TBDForm.N6Click(Sender: TObject);
+begin
+  Parts.Edit;
+  Parts.FieldByName('Photo').Clear;
+  Parts.Post;
+end;
+
 procedure TBDForm.N7Click(Sender: TObject);
 begin
   StatusRef.Show();
 end;
 
-
 procedure TBDForm.N8Click(Sender: TObject);
 begin
-  if GridPopupMenu.PopupComponent = MainForm.DBGrid3 then
-    MessageDlg('DBGRIDsoska', mtWarning, [mbOk], 0)
-  else
-    MessageDlg('DBGRIDLalka', mtWarning, [mbOk], 0);
+  TransactionsTypesRef.Show();
+end;
+
+procedure TBDForm.AddClick(Sender: TObject);
+begin
+  if GridPopupMenu.PopupComponent = MainForm.DetailsGrid then
+    if(Parts.State in [dsEdit, dsInsert])
+    then Parts.Post
+    else Parts.Insert
+  else if GridPopupMenu.PopupComponent = MainForm.OrdersGrid then
+    if(Orders.State in [dsEdit, dsInsert])
+    then Orders.Post
+    else Orders.Insert
+  else if GridPopupMenu.PopupComponent = MainForm.TransactionsGrid then
+    if(Transactions.State in [dsEdit, dsInsert])
+    then Transactions.Post
+    else Transactions.Insert
+  else if (GridPopupMenu.PopupComponent = MainForm.ItemsGrid2) or (GridPopupMenu.PopupComponent = MainForm.ItemsGrid1)
+    then if(OrderItems.State in [dsEdit, dsInsert])
+    then OrderItems.Post
+    else OrderItems.Insert
+end;
+
+procedure TBDForm.EditClick(Sender: TObject);
+begin
+  if GridPopupMenu.PopupComponent = MainForm.DetailsGrid then
+    Parts.Edit
+  else if GridPopupMenu.PopupComponent = MainForm.OrdersGrid then
+    Orders.Edit
+  else if GridPopupMenu.PopupComponent = MainForm.TransactionsGrid then
+    Transactions.Edit
+  else if (GridPopupMenu.PopupComponent = MainForm.ItemsGrid2) or (GridPopupMenu.PopupComponent = MainForm.ItemsGrid1)
+    then OrderItems.Edit;
+end;
+
+procedure TBDForm.CancelClick(Sender: TObject);
+begin
+  if GridPopupMenu.PopupComponent = MainForm.DetailsGrid then
+    Parts.Cancel
+  else if GridPopupMenu.PopupComponent = MainForm.OrdersGrid then
+    Orders.Cancel
+  else if GridPopupMenu.PopupComponent = MainForm.TransactionsGrid then
+    Transactions.Cancel
+  else if (GridPopupMenu.PopupComponent = MainForm.ItemsGrid2) or (GridPopupMenu.PopupComponent = MainForm.ItemsGrid1)
+    then OrderItems.Cancel;
+end;
+
+procedure TBDForm.DelClick(Sender: TObject);
+begin
+  if GridPopupMenu.PopupComponent = MainForm.DetailsGrid then
+    begin
+      if Parts.RecordCount <> 0 then
+        if MessageDlg('Удалить выбранную запись?',mtWarning, [mbYes, mbNo], 0) = mrYes
+          then Parts.Delete;
+    end
+  else if GridPopupMenu.PopupComponent = MainForm.OrdersGrid then
+    begin
+      if Orders.RecordCount <> 0 then
+        if MessageDlg('Удалить выбранную запись?',mtWarning, [mbYes, mbNo], 0) = mrYes
+          then Orders.Delete;
+    end
+  else if GridPopupMenu.PopupComponent = MainForm.TransactionsGrid then
+    begin
+      if Transactions.RecordCount <> 0 then
+        if MessageDlg('Удалить выбранную запись?',mtWarning, [mbYes, mbNo], 0) = mrYes
+          then Transactions.Delete;
+    end
+  else if (GridPopupMenu.PopupComponent = MainForm.ItemsGrid2) or (GridPopupMenu.PopupComponent = MainForm.ItemsGrid1) then
+    begin
+      if OrderItems.RecordCount <> 0 then
+        if MessageDlg('Удалить выбранную запись?',mtWarning, [mbYes, mbNo], 0) = mrYes
+          then OrderItems.Delete;
+    end
+end;
+
+procedure TBDForm.e1Click(Sender: TObject);
+var
+    BlobStream: TMemoryStream;
+    Field: TBlobField;
+    pict: TPicture;
+  const
+    MAX_WIDTH = 640;
+    MAX_HEIGHT = 640;
+begin
+  try
+    if OpenPictureDialog1.Execute then
+    begin
+      pict := TPicture.Create;
+      pict.LoadFromFile(OpenPictureDialog1.FileName);
+      if (pict.Width<=MAX_WIDTH)and(pict.Height<=MAX_HEIGHT)
+       then
+     begin
+      Pict.Free;
+      BlobStream := TMemoryStream.Create;
+      try
+        BlobStream.LoadFromFile(OpenPictureDialog1.FileName);
+        BlobStream.Position := 0;
+        MainForm.DBImage1.Picture.LoadFromStream(BlobStream);
+        if Parts.Active then
+        begin
+          Parts.Edit;
+          Field := TBLobField(Parts.FieldByName('Photo'));
+          Field.LoadFromStream(BlobStream);
+          Parts.Post;
+        end;
+      finally
+        BlobStream.Free;
+      end;
+     end
+     else begin
+       ShowMessage('Selected image is too large. Please choose an image with dimensions up to ' + IntToStr(MAX_WIDTH) + 'x' + IntToStr(MAX_HEIGHT) + '.');
+       Pict.Free;
+     end;
+
+    end;
+  finally
+
+  end;
 
 end;
 

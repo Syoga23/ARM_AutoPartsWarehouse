@@ -16,6 +16,7 @@ object MainForm: TMainForm
   FormStyle = fsStayOnTop
   Menu = BDForm.Menu
   Position = poScreenCenter
+  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object Splitter1: TSplitter
@@ -337,7 +338,7 @@ object MainForm: TMainForm
       Top = 1
       Width = 852
       Height = 569
-      ActivePage = Tab3
+      ActivePage = Tab2
       Align = alClient
       MultiLine = True
       TabOrder = 0
@@ -346,13 +347,14 @@ object MainForm: TMainForm
       ExplicitHeight = 568
       object Tab1: TTabSheet
         Caption = #1047#1072#1087#1095#1072#1089#1090#1080
-        object DBGrid1: TDBGrid
+        object DetailsGrid: TDBGrid
           Left = 0
           Top = 0
           Width = 844
           Height = 541
           Align = alClient
           DataSource = BDForm.PartsDS
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           PopupMenu = BDForm.GridPopupMenu
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -449,13 +451,14 @@ object MainForm: TMainForm
           Align = alBottom
           ExplicitTop = 270
         end
-        object DBGrid3: TDBGrid
+        object OrdersGrid: TDBGrid
           Left = 0
           Top = 0
           Width = 844
           Height = 269
           Align = alClient
           DataSource = BDForm.OrdersDS
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           PopupMenu = BDForm.GridPopupMenu
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -484,19 +487,16 @@ object MainForm: TMainForm
             item
               Expanded = False
               FieldName = 'Status_ID'
-              Width = -1
               Visible = False
             end
             item
               Expanded = False
               FieldName = 'Client_ID'
-              Width = -1
               Visible = False
             end
             item
               Expanded = False
               FieldName = 'Employee_ID'
-              Width = -1
               Visible = False
             end
             item
@@ -518,7 +518,177 @@ object MainForm: TMainForm
               Visible = True
             end>
         end
-        object DBGrid6: TDBGrid
+        object ItemsGrid1: TDBGrid
+          Left = 0
+          Top = 272
+          Width = 844
+          Height = 269
+          Align = alBottom
+          DataSource = BDForm.OrderItemsDS
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+          PopupMenu = BDForm.GridPopupMenu
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -12
+          TitleFont.Name = 'Segoe UI'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Part'
+              Width = 190
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OrderID'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Order_Date'
+              Width = 190
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Part_ID'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Quantity'
+              Width = 190
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Price'
+              Width = 190
+              Visible = True
+            end>
+        end
+      end
+      object Tab3: TTabSheet
+        Caption = #1048#1089#1090#1086#1088#1080#1103' '#1090#1088#1072#1085#1079#1072#1082#1094#1080#1081
+        ImageIndex = 2
+        object Splitter3: TSplitter
+          Left = 0
+          Top = 269
+          Width = 844
+          Height = 3
+          Cursor = crVSplit
+          Align = alBottom
+          ExplicitTop = 0
+          ExplicitWidth = 272
+        end
+        object TransactionsGrid: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 844
+          Height = 269
+          Align = alClient
+          DataSource = BDForm.TransactionsDS
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+          PopupMenu = BDForm.GridPopupMenu
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -12
+          TitleFont.Name = 'Segoe UI'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'TransactionID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Order_ID'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TransactionDate'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Quantity'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PaymentType_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'TransactionType_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Status_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Employee_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Client_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'TransactionType'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'Status'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Employee'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Client'
+              Width = 110
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PaymentType'
+              Width = 110
+              Visible = True
+            end>
+        end
+        object ItemsGrid2: TDBGrid
           Left = 0
           Top = 272
           Width = 844
@@ -541,131 +711,39 @@ object MainForm: TMainForm
             item
               Expanded = False
               FieldName = 'OrderID'
+              Width = -1
               Visible = False
             end
             item
               Expanded = False
-              FieldName = 'PartName'
+              FieldName = 'Part'
+              Width = 190
               Visible = True
             end
             item
               Expanded = False
+              FieldName = 'Order_Date'
+              Width = 190
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Part_ID'
+              Width = -1
+              Visible = False
+            end
+            item
+              Expanded = False
               FieldName = 'Quantity'
+              Width = 190
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'Price'
+              Width = 190
               Visible = True
             end>
-        end
-      end
-      object Tab3: TTabSheet
-        Caption = #1048#1089#1090#1086#1088#1080#1103' '#1090#1088#1072#1085#1079#1072#1082#1094#1080#1081
-        ImageIndex = 2
-        object Splitter3: TSplitter
-          Left = 0
-          Top = 269
-          Width = 844
-          Height = 3
-          Cursor = crVSplit
-          Align = alBottom
-          ExplicitTop = 0
-          ExplicitWidth = 272
-        end
-        object DBGrid4: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 844
-          Height = 269
-          Align = alClient
-          DataSource = BDForm.TransactionsDS
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -12
-          TitleFont.Name = 'Segoe UI'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'TransactionID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Order_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TransactionDate'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Quantity'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PaymentType_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TransactionType_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Status_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Employee_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Client_ID'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TransactionType'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Status'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Employee'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Client'
-              Visible = True
-            end>
-        end
-        object DBGrid5: TDBGrid
-          Left = 0
-          Top = 272
-          Width = 844
-          Height = 269
-          Align = alBottom
-          DataSource = BDForm.OrderItemsDS
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -12
-          TitleFont.Name = 'Segoe UI'
-          TitleFont.Style = []
         end
       end
     end
