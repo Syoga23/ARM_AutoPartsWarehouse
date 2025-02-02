@@ -4,7 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Classes, VCL.Forms, Data.DB, Data.Win.ADODB, VCL.Dialogs, IniFiles,
-  Vcl.Menus, Vcl.Controls, Vcl.ExtDlgs, Vcl.Graphics;
+  Vcl.Menus, Vcl.Controls, Vcl.ExtDlgs, Vcl.Graphics, System.ImageList,
+  Vcl.ImgList, AddPartUnit, AddOrderUnit, AddTransactionUnit;
 type
   TBDForm = class(TDataModule)
     Connection: TADOConnection;
@@ -13,7 +14,6 @@ type
     Menu: TMainMenu;
     S1: TMenuItem;
     N1: TMenuItem;
-    N2: TMenuItem;
     N3: TMenuItem;
     PartsDS: TDataSource;
     Parts: TADOQuery;
@@ -66,7 +66,6 @@ type
     Warehouseslocation: TStringField;
     TransactionsTransactionID: TAutoIncField;
     TransactionsOrder_ID: TIntegerField;
-    TransactionsTransactionDate: TDateTimeField;
     TransactionsQuantity: TIntegerField;
     TransactionsTransactionType_ID: TIntegerField;
     TransactionsStatus_ID: TIntegerField;
@@ -91,19 +90,11 @@ type
     PartTypesType_ID: TAutoIncField;
     PartTypesType_Name: TWideStringField;
     PartTypesType_Description: TWideStringField;
-    PartsSupplier: TStringField;
     PartsType: TStringField;
     PartsWarehouse: TStringField;
     WarehousesName: TWideStringField;
     OrdersStatus: TStringField;
     OrdersClient: TStringField;
-    SuppliersSupplierID: TAutoIncField;
-    SuppliersName: TWideStringField;
-    SuppliersContactName: TWideStringField;
-    SuppliersContactPhone: TWideStringField;
-    SuppliersCountry: TWideStringField;
-    SuppliersAddress: TWideStringField;
-    SuppliersEmail: TWideStringField;
     PartTypeLookupDS: TDataSource;
     PartTypeLookup: TADOQuery;
     AutoIncField1: TAutoIncField;
@@ -149,9 +140,35 @@ type
     N8: TMenuItem;
     TransactionsEmployee2: TStringField;
     OpenPictureDialog1: TOpenPictureDialog;
+    SuppliersLookup: TADOQuery;
+    SuppliersLookupDS: TDataSource;
+    ClientsSupplier_ID: TIntegerField;
+    ClientsSupplier: TStringField;
+    SuppliersSupplierID: TAutoIncField;
+    SuppliersName: TWideStringField;
+    SuppliersContactName: TWideStringField;
+    SuppliersContactPhone: TWideStringField;
+    SuppliersCountry: TWideStringField;
+    SuppliersAddress: TWideStringField;
+    SuppliersEmail: TWideStringField;
+    SuppliersLookupSupplierID: TAutoIncField;
+    SuppliersLookupName: TWideStringField;
+    SuppliersLookupContactName: TWideStringField;
+    SuppliersLookupContactPhone: TWideStringField;
+    SuppliersLookupCountry: TWideStringField;
+    SuppliersLookupAddress: TWideStringField;
+    SuppliersLookupEmail: TWideStringField;
+    PartsSupplier: TStringField;
+    ImageListBar: TImageList;
+    ImageListPopup: TImageList;
+    N13: TMenuItem;
+    N2: TMenuItem;
+    N9: TMenuItem;
+    TransactionsOrder: TDateField;
+    TransactionsTransactionDate: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure s2Click(Sender: TObject);
-    procedure PartsBeforePost(DataSet: TDataSet);
+    //procedure PartsBeforePost(DataSet: TDataSet);
     procedure G1Click(Sender: TObject);
     procedure PartTypesDSDataChange(Sender: TObject; Field: TField);
     procedure N4Click(Sender: TObject);
@@ -169,6 +186,10 @@ type
     procedure N8Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
     procedure e1Click(Sender: TObject);
+    procedure TransactionsDSDataChange(Sender: TObject; Field: TField);
+    procedure N13Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -237,6 +258,11 @@ begin
   WarehousesRef.Show();
 end;
 
+procedure TBDForm.N13Click(Sender: TObject);
+begin
+AddPartForm.Show();
+end;
+
 procedure TBDForm.N3Click(Sender: TObject);
 begin
 AboutProgram.Show();
@@ -256,7 +282,6 @@ procedure TBDForm.N6Click(Sender: TObject);
 begin
   Parts.Edit;
   Parts.FieldByName('Photo').Clear;
-  Parts.Post;
 end;
 
 procedure TBDForm.N7Click(Sender: TObject);
@@ -267,6 +292,16 @@ end;
 procedure TBDForm.N8Click(Sender: TObject);
 begin
   TransactionsTypesRef.Show();
+end;
+
+procedure TBDForm.N9Click(Sender: TObject);
+begin
+AddTransactionForm.Show();
+end;
+
+procedure TBDForm.N2Click(Sender: TObject);
+begin
+AddOrderForm.Show();
 end;
 
 procedure TBDForm.AddClick(Sender: TObject);
@@ -369,7 +404,6 @@ begin
           Parts.Edit;
           Field := TBLobField(Parts.FieldByName('Photo'));
           Field.LoadFromStream(BlobStream);
-          Parts.Post;
         end;
       finally
         BlobStream.Free;
@@ -394,10 +428,12 @@ OrderItems.Parameters.ParamByName('OrderKey').Value := Orders.FieldByName('Order
 OrderItems.Open;
 end;
 
+{
 procedure TBDForm.PartsBeforePost(DataSet: TDataSet);
 begin
-Parts.FieldByName('TypeID').Value:= BDForm.Parts.Parameters.ParamByName('TypeID').Value;
-end;
+if Parts.State in [dsEdit]
+  then Parts.FieldByName('TypeID').Value:= BDForm.Parts.Parameters.ParamByName('TypeID').Value;
+end;}
 
 procedure TBDForm.PartTypesDSDataChange(Sender: TObject; Field: TField);
 begin
@@ -414,6 +450,13 @@ end;
 procedure TBDForm.s3Click(Sender: TObject);
 begin
 PaymentTypesRef.Show();
+end;
+
+procedure TBDForm.TransactionsDSDataChange(Sender: TObject; Field: TField);
+begin
+OrderItems.Close;
+OrderItems.Parameters.ParamByName('OrderKey').Value := Transactions.FieldByName('Order_ID').Value;
+OrderItems.Open;
 end;
 
 end.

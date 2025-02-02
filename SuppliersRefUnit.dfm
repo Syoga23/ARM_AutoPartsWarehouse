@@ -31,15 +31,15 @@ object SuppliersRef: TSuppliersRef
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 983
-    ExplicitHeight = 643
+    ExplicitWidth = 1114
+    ExplicitHeight = 698
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
       Width = 1116
       Height = 697
       Align = alClient
-      DataSource = BDForm.SuppliersDS
+      DataSource = BDForm.SuppliersLookupDS
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -99,18 +99,17 @@ object SuppliersRef: TSuppliersRef
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 1
-    ExplicitTop = 653
-    ExplicitWidth = 994
+    ExplicitTop = 701
+    ExplicitWidth = 1114
     object DBNavigator1: TDBNavigator
       Left = 877
       Top = 1
       Width = 240
       Height = 38
-      DataSource = BDForm.SuppliersDS
+      DataSource = BDForm.SuppliersLookupDS
       Align = alRight
       TabOrder = 0
-      ExplicitLeft = 742
-      ExplicitHeight = 39
+      ExplicitLeft = 873
     end
   end
 end

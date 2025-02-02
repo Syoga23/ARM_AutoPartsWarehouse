@@ -154,6 +154,18 @@
             <Form>PaymentTypesRef</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="AddPartUnit.pas">
+            <Form>AddPartForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="AddOrderUnit.pas">
+            <Form>AddOrderForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="AddTransactionUnit.pas">
+            <Form>AddTransactionForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

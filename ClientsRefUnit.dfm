@@ -31,8 +31,8 @@ object ClientsRef: TClientsRef
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 696
-    ExplicitWidth = 1115
+    ExplicitTop = 701
+    ExplicitWidth = 1114
     object DBNavigator1: TDBNavigator
       Left = 877
       Top = 1
@@ -41,8 +41,7 @@ object ClientsRef: TClientsRef
       DataSource = BDForm.ClientsDS
       Align = alRight
       TabOrder = 0
-      ExplicitLeft = 707
-      ExplicitHeight = 42
+      ExplicitLeft = 873
     end
   end
   object Panel2: TPanel
@@ -54,10 +53,8 @@ object ClientsRef: TClientsRef
     Caption = 'Panel2'
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -320
-    ExplicitTop = -163
-    ExplicitWidth = 948
-    ExplicitHeight = 605
+    ExplicitWidth = 1114
+    ExplicitHeight = 698
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
@@ -80,13 +77,13 @@ object ClientsRef: TClientsRef
         item
           Expanded = False
           FieldName = 'FIO'
-          Width = 200
+          Width = 180
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Birthdate'
-          Width = 200
+          Width = 180
           Visible = True
         end
         item
@@ -98,19 +95,25 @@ object ClientsRef: TClientsRef
         item
           Expanded = False
           FieldName = 'Email'
-          Width = 200
+          Width = 180
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Phone'
-          Width = 200
+          Width = 180
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Location'
-          Width = 200
+          Width = 180
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Supplier'
+          Width = 180
           Visible = True
         end>
     end

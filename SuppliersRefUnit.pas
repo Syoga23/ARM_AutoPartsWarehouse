@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Data.DB, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids;
+  Vcl.Grids, Vcl.DBGrids, BDUnit;
 
 type
   TSuppliersRef = class(TForm)
@@ -26,7 +26,5 @@ var
 implementation
 
 {$R *.dfm}
-
-Uses BDUnit;
 
 end.

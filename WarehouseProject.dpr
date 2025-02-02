@@ -14,7 +14,10 @@ uses
   StatusUnit in 'StatusUnit.pas' {StatusRef},
   TransactionsTypesUnit in 'TransactionsTypesUnit.pas' {TransactionsTypesRef},
   AboutUnit in 'AboutUnit.pas' {AboutProgram},
-  PaymentTypesUnit in 'PaymentTypesUnit.pas' {PaymentTypesRef};
+  PaymentTypesUnit in 'PaymentTypesUnit.pas' {PaymentTypesRef},
+  AddPartUnit in 'AddPartUnit.pas' {AddPartForm},
+  AddOrderUnit in 'AddOrderUnit.pas' {AddOrderForm},
+  AddTransactionUnit in 'AddTransactionUnit.pas' {AddTransactionForm};
 
 {$R *.res}
 
@@ -33,5 +36,8 @@ begin
   Application.CreateForm(TTransactionsTypesRef, TransactionsTypesRef);
   Application.CreateForm(TAboutProgram, AboutProgram);
   Application.CreateForm(TPaymentTypesRef, PaymentTypesRef);
+  Application.CreateForm(TAddPartForm, AddPartForm);
+  Application.CreateForm(TAddOrderForm, AddOrderForm);
+  Application.CreateForm(TAddTransactionForm, AddTransactionForm);
   Application.Run;
 end.

@@ -31,10 +31,8 @@ object TransactionsTypesRef: TTransactionsTypesRef
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 0
-    ExplicitLeft = -359
-    ExplicitTop = -202
-    ExplicitWidth = 987
-    ExplicitHeight = 644
+    ExplicitWidth = 784
+    ExplicitHeight = 517
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
@@ -70,9 +68,8 @@ object TransactionsTypesRef: TTransactionsTypesRef
     Caption = 'Panel1'
     ShowCaption = False
     TabOrder = 1
-    ExplicitLeft = -359
-    ExplicitTop = 401
-    ExplicitWidth = 987
+    ExplicitTop = 520
+    ExplicitWidth = 784
     object DBNavigator1: TDBNavigator
       Left = 547
       Top = 1
@@ -81,7 +78,7 @@ object TransactionsTypesRef: TTransactionsTypesRef
       DataSource = BDForm.TransactionTypesDS
       Align = alRight
       TabOrder = 0
-      ExplicitLeft = 746
+      ExplicitLeft = 543
     end
   end
 end
