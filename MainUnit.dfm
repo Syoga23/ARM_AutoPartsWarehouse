@@ -45,6 +45,7 @@ object MainForm: TMainForm
     Height = 595
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 594
     object DetTypesTitle: TLabel
       AlignWithMargins = True
       Left = 2
@@ -105,6 +106,7 @@ object MainForm: TMainForm
     Height = 242
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 1086
     object Label1: TLabel
       Left = 10
       Top = 52
@@ -183,6 +185,7 @@ object MainForm: TMainForm
       EdgeOuter = esRaised
       Images = BDForm.ImageListBar
       TabOrder = 0
+      ExplicitWidth = 1084
       object ToolButton1: TToolButton
         Left = 0
         Top = 0
@@ -219,6 +222,7 @@ object MainForm: TMainForm
       Caption = 'Panel2'
       ShowCaption = False
       TabOrder = 1
+      ExplicitLeft = 885
       object DBImage1: TDBImage
         Left = 1
         Top = 1
@@ -321,6 +325,8 @@ object MainForm: TMainForm
     Height = 595
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 842
+    ExplicitHeight = 594
     object PageControl1: TPageControl
       Left = 1
       Top = 1
@@ -332,6 +338,8 @@ object MainForm: TMainForm
       TabOrder = 0
       TabPosition = tpBottom
       OnChange = PageControl1Change
+      ExplicitWidth = 840
+      ExplicitHeight = 592
       object Tab1: TTabSheet
         Caption = #1047#1072#1087#1095#1072#1089#1090#1080
         object DetailsGrid: TDBGrid
@@ -649,7 +657,6 @@ object MainForm: TMainForm
             item
               Expanded = False
               FieldName = 'Order_ID'
-              Width = -1
               Visible = False
             end
             item

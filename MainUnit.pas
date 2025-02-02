@@ -144,7 +144,7 @@ end;
 
 procedure TMainForm.ToolButton4Click(Sender: TObject);
 begin
-  ShellExecute(0,Pchar('Open'),PChar('help.chm'),nil,nil,SW_SHOW);
+  ShellExecute(0,Pchar('Open'),PChar('Help.chm'),nil,nil,SW_SHOW);
 end;
 
 end.
